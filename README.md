@@ -1,3 +1,5 @@
+Instrucciones en <https://jdleongomez.github.io/RTX-3060-RX-9070-XT/>
+
 # RTX 3060 → RX 9070 XT (CachyOS)
 
 ## Pre-cambio (con NVIDIA puesta)
