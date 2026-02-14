@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Upgrade RTX 3060 &rarr; RX 9070 XT &lpar;CachyOS &sol; Arch &sol; Hyprland&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension bierner.markdown-checkbox */
+.contains-task-list {
+    padding-left: 0;
+}
+
+.contains-task-list li {
+    margin-left: 24px;
+}
+
+.contains-task-list .task-list-item {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.contains-task-list .contains-task-list {
+    padding-left: 20px;
+} 
+/* From extension foam.foam-vscode */
+.foam-placeholder-link {
+  color: var(--vscode-editorWarning-foreground);
+  cursor: default;
+}
+
+.foam-note-link,
+.foam-attachment-link {
+  color: var(--vscode-textLink-foreground);
+}
+
+.foam-tag {
+  color: var(--vscode-editorLineNumber-foreground);
+}
+
+.foam-cyclic-link-warning {
+  border: 1px solid var(--vscode-editorWarning-foreground);
+  background-color: var(--vscode-editorError-background);
+  color: var(--vscode-editorError-foreground);
+  padding: 0.5em;
+}
+
+.foam-cyclic-link-warning__stack {
+  color: var(--vscode-editorWarning-foreground);
+}
+
+.foam-embed-not-supported-warning {
+  border: 1px solid var(--vscode-editorWarning-foreground);
+  background-color: var(--vscode-editorError-background);
+  color: var(--vscode-editorWarning-foreground);
+  padding: 0.5em;
+}
+
+.embed-container-note {
+  padding: 0.5em;
+  margin: 1.5em 0;
+  border: 1px solid var(--vscode-editorLineNumber-foreground);
+}
+
+.embed-container-attachment {
+  padding: 0.25em;
+  margin: 1.5em 0;
+  text-align: center;
+  border: 1px solid var(--vscode-editorLineNumber-foreground);
+}
+
+.embed-container-image {
+  margin: auto;
+  padding: 0.25em;
+  text-align: center;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="upgrade-rtx-3060--rx-9070-xt-cachyos--arch--hyprland">Upgrade RTX 3060 → RX 9070 XT (CachyOS / Arch / Hyprland)</h1>
+<p>Guía paso a paso para cambiar de NVIDIA propietario a AMD (amdgpu).</p>
+<hr>
+<h2 id="1--antes-de-apagar-el-equipo-con-la-gpu-nvidia-aún-instalada">1)  ANTES DE APAGAR EL EQUIPO (con la GPU NVIDIA aún instalada)</h2>
+<p>1.1 Ver qué paquetes NVIDIA están instalados</p>
+<p><code>pacman -Qs nvidia</code></p>
+<hr>
+<p>1.2 Desinstalar drivers NVIDIA</p>
+<p><code>sudo pacman -Rns nvidia-580xx-dkms nvidia-580xx-utils lib32-nvidia-580xx-utils opencl-nvidia-580xx lib32-opencl-nvidia-580xx libva-nvidia-driver egl-x11</code></p>
+<p>o</p>
+<p><code>sudo pacman -Rns $(pacman -Qq | grep nvidia)</code></p>
+<hr>
+<p>1.3 Verificar:</p>
+<p><code>pacman -Qs nvidia</code> -&gt; No debe quedar nada instalado excepto cosas tipo nvidia-settings</p>
+<hr>
+<p>1.4 Verificar flags del kernel</p>
+<p><code>cat /proc/cmdline</code></p>
+<p>Si aparece algo como:</p>
+<p><code>nvidia_drm.modeset=1</code></p>
+<p>Debo eliminarlo del bootloader.</p>
+<p>En GRUB:</p>
+<p><code>sudo micro /etc/default/grub</code></p>
+<p>Eliminar <code>nvidia_drm.modeset=1</code> de la línea <code>GRUB_CMDLINE_LINUX_DEFAULT</code>.</p>
+<p>Luego regenerar:</p>
+<p><code>sudo grub-mkconfig -o /boot/grub/grub.cfg</code></p>
+<p>Y regenerar initramfs:</p>
+<p><code>sudo mkinitcpio -P</code></p>
+<hr>
+<p>1.5 Reboot (con la GPU NVIDIA puesta)</p>
+<p><code>reboot</code></p>
+<p>Reiniciar antes de cambiar físicamente la GPU y antes de instalar el stack AMD para verificar que:</p>
+<ul>
+<li>El sistema arranca sin los módulos NVIDIA</li>
+<li>No hay errores en initramfs</li>
+<li>No queda nada bloqueando el arranque</li>
+<li>Está usando solo drivers genéricos (modesetting)</li>
+</ul>
+<p>Si algo falla, aún está instalada la NVIDIA y es más fácil corregirlo.</p>
+<p>Tras reiniciar, verificar:</p>
+<p><code>lsmod | grep nvidia</code> -&gt; debe devolver vacío</p>
+<hr>
+<p>1.6 Instalar stack gráfico AMD</p>
+<p><code>sudo pacman -S mesa vulkan-radeon lib32-mesa lib32-vulkan-radeon linux-firmware</code></p>
+<p>Instalar soporte VAAPI (aceleración de vídeo):</p>
+<p><code>sudo pacman -S libva-mesa-driver</code></p>
+<p>Opcional (para verificar luego):</p>
+<p><code>sudo pacman -S libva-utils</code></p>
+<hr>
+<h2 id="2--cambio-físico-de-hardware">2)  CAMBIO FÍSICO DE HARDWARE</h2>
+<pre><code>2.1  Apagar el equipo  
+2.2  Desconectar corriente  
+2.3  Cambiar la PSU (si corresponde)  
+2.4  Instalar la RX 9070 XT  
+2.5  Conectar correctamente los cables PCIe (sin adaptadores)  
+2.6  Encender el equipo
+</code></pre>
+<hr>
+<h2 id="3--verificaciones-al-arrancar">3)  VERIFICACIONES AL ARRANCAR</h2>
+<p>3.1 Confirmar que carga amdgpu</p>
+<p><code>lspci -k | grep -A 3 -E &quot;VGA|Display&quot;</code></p>
+<p>Debe aparecer:</p>
+<p><code>Kernel driver in use: amdgpu</code></p>
+<hr>
+<p>3.2 Verificar Vulkan</p>
+<p>Si no está instalado:</p>
+<p><code>sudo pacman -S vulkan-tools</code></p>
+<p>Luego:</p>
+<p><code>vulkaninfo \| grep deviceName</code></p>
+<p>Debe mostrar la RX 9070 XT.</p>
+<hr>
+<p>3.3 Verificar aceleración de vídeo (VAAPI)</p>
+<p><code>vainfo</code></p>
+<p>Debe listar codecs como: <code>H264 HEVC AV1</code></p>
+<hr>
+<h2 id="4--recomendado">4)  RECOMENDADO</h2>
+<p>Instalar CoreCtrl (undervolt / control fino):</p>
+<p><code>sudo pacman -S corectrl</code></p>
+<p>Permite: - Undervolt ligero - Ajuste de curvas de ventilador - Mejor
+eficiencia térmica</p>
+<hr>
+<h2 id="5--checklist-final">5)  CHECKLIST FINAL</h2>
+<p>[ ] Drivers NVIDIA eliminados<br>
+[ ] Flags del kernel limpiados<br>
+[ ] Mesa y Vulkan instalados<br>
+[ ] amdgpu cargado correctamente<br>
+[ ] Vulkan funcionando<br>
+[ ] VAAPI funcionando</p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
